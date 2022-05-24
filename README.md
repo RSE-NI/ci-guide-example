@@ -1,3 +1,6 @@
+adding a line for CI demo
+
+
 # ci-guide-example
 
 Example Python unit testing code used as part of the Software Sustainability Institute's 
