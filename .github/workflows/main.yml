@@ -6,31 +6,33 @@ on: push
 
 # now define a single job 'build' (but could define more)
 jobs:
+
   build:
-      runs-on: ${{ matrix.os }}
+
+    runs-on: ${{ matrix.os }}
       strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: [3.8, 3.9]
+        matrix:
+          os: [ubuntu-latest, macos-latest, windows-latest]
+          python-version: [3.8, 3.9]
 
     # a job is a seq of steps
-      steps:
+    steps:
 
-        # Next we need to checkout repository and set up Python
-        # A 'name' is just an optional label shown in the log - helpful to clarify progress - and can be anything
-        - name: Checkout repository
-          uses: actions/checkout@v2
+    # Next we need to checkout repository and set up Python
+    # A 'name' is just an optional label shown in the log - helpful to clarify progress - and can be anything
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-        - name: Set up Python
-          uses: actions/setup-python@v2
-          with:
-            python-version: ${{ matrix.python-version }}
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
 
-        - name: Install Python dependencies
-          run: |
-            python3 -m pip install --upgrade pip
-            python3 -m pip install -r requirements.txt
+    - name: Install Python dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install -r requirements.txt
 
-        - name: Test with pytest
-          run: |
-            python3 -m pytest --cov=mymath.factorial tests/test_factorial.py
+    - name: Test with pytest
+      run: |
+        python3 -m pytest --cov=mymath.factorial tests/test_factorial.py
